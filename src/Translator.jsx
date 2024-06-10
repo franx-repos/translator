@@ -1,15 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import Form from "./components/Form";
-import Translations from "./components/Translations";
 
 const Translator = () => {
-  const [definition, setDefinition] = useState("");
-  const [searchTerm, setSearchTerm] = useState({
-    from: null,
-    to: null,
-    searchStr: "",
-  });
+  const [definition, setDefinition] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchDefinition = async (word) => {
     const apiKey =
@@ -21,12 +15,8 @@ const Translator = () => {
 
       if (response.status === 200) {
         const data = response.data;
-
         // const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
         const definition = data.def[0] || "No definition found.";
-
-        console.log(data);
-
         setDefinition(definition);
         console.log(definition);
       } else {
@@ -38,11 +28,10 @@ const Translator = () => {
     }
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!searchTerm.searchStr) return;
+  const handleSearch = async () => {
+    if (!searchTerm) return;
     try {
-      await fetchDefinition(searchTerm.searchStr);
+      await fetchDefinition(searchTerm);
     } catch (error) {
       console.error("Error fetching definition:", error);
       setDefinition("No definition found.");
@@ -51,6 +40,7 @@ const Translator = () => {
 
   return (
     <div>
+      <h1>Translation App</h1>
       <div>
         <input
           type="text"
@@ -76,14 +66,6 @@ const Translator = () => {
           <p>nothing found</p>
         )}
       </div>
-
-      <h2>Translation App</h2>
-      <Form
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        handleSearch={handleSearch}
-      />
-      <Translations answer={definition} />
     </div>
   );
 };
