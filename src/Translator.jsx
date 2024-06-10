@@ -15,7 +15,6 @@ const Translator = () => {
 
       if (response.status === 200) {
         const data = response.data;
-        // const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
         const definition = data.def[0] || "No definition found.";
         setDefinition(definition);
         console.log(definition);
@@ -39,55 +38,84 @@ const Translator = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-row">
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for a word..."
-        />
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
-      </div>
-      <div>
-        <a
-          href="#"
-          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {definition.text}
-          </h5>
-          {definition.tr ? (
-            <>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                word type: {definition.pos}
+    <div className=" bg-gray-100 flex flex-col items-center justify-center py-12 px-4">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Translation App
+          </h1>
+        </div>
+        <div className="mt-8 space-y-6">
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search for a word..."
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md "
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              onClick={handleSearch}
+              className="relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+            >
+              Search
+            </button>
+          </div>
+          <div className="bg-white shadow overflow-hidden">
+            <div className="px-4 py-5">
+              <h3 className="text-lg leading-6 font-medium text-gray-900">
+                Definition
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                Word details and translations.
               </p>
-              <p className="font-normal text-gray-700 dark:text-gray-400">
-                phonetic spelling: {definition.ts}
-              </p>
-              <ul>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  synonyms:
-                </p>
-                {definition.tr?.map((entry) => {
-                  return (
-                    <li>
-                      <p className="font-normal text-gray-700 dark:text-gray-400">{`${entry.text} > ${entry.ts}`}</p>
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          ) : (
-            <p>nothing found</p>
-          )}
-        </a>
+            </div>
+            <div className="border-t border-gray-200">
+              <div>
+                {definition.tr ? (
+                  <>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <div className="text-sm font-medium text-gray-500">
+                        Word Type
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {definition.pos}
+                      </div>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <div className="text-sm font-medium text-gray-500">
+                        Phonetic Spelling
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {definition.ts}
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <div className="text-sm font-medium text-gray-500">
+                        Synonyms
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <ul className="list-disc pl-5 space-y-1">
+                          {definition.tr?.map((entry, index) => (
+                            <li key={index}>{`${entry.text} > ${entry.ts}`}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="bg-gray-50 px-4 py-5 sm:px-6">
+                    <p className="text-sm text-gray-500">Nothing found.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
