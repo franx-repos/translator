@@ -51,7 +51,6 @@ const Translator = () => {
 
   return (
     <div>
-      <h1>Translation App</h1>
       <div>
         <input
           type="text"
