@@ -1,3 +1,11 @@
+
+import { useState } from "react";
+import axios from "axios";
+
+const Translator = () => {
+  const [definition, setDefinition] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+
 import { useState } from 'react';
 import axios from 'axios';
 import Form from './components/Form';
@@ -12,22 +20,32 @@ const Translator = () => {
     searchStr: ''
   });
 
+
   const fetchDefinition = async (word) => {
-    const apiKey = 'dict.1.1.20240610T090637Z.f6d6efe832849511.e996d69148c86f9d5c0b20bb029c2989646ee383';
+    const apiKey =
+      "dict.1.1.20240610T090637Z.f6d6efe832849511.e996d69148c86f9d5c0b20bb029c2989646ee383";
     try {
-      const response = await axios.get(`https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${apiKey}&lang=en-en&text=${word}`);
-  
+      const response = await axios.get(
+        `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${apiKey}&lang=en-en&text=${word}`
+      );
+
       if (response.status === 200) {
         const data = response.data;
+
+        // const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
+        const definition = data.def[0] || "No definition found.";
+
         const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
         console.log(data)
+
         setDefinition(definition);
+        console.log(definition);
       } else {
-        setDefinition('No definition found.');
+        setDefinition("No definition found.");
       }
     } catch (error) {
-      console.error('Error fetching definition:', error);
-      setDefinition('No definition found.');
+      console.error("Error fetching definition:", error);
+      setDefinition("No definition found.");
     }
   };
 
@@ -37,16 +55,45 @@ const Translator = () => {
     try {
       await fetchDefinition(searchTerm.searchStr);
     } catch (error) {
-      console.error('Error fetching definition:', error);
-      setDefinition('No definition found.');
+      console.error("Error fetching definition:", error);
+      setDefinition("No definition found.");
     }
   };
 
   return (
     <div>
+
+      <h1>Translation App</h1>
+      <div>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search for a word..."
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      <div>
+        {definition.tr ? (
+          <>
+            <p>word type: {definition.pos}</p>
+            <p>phonetic spelling: {definition.ts}</p>
+            <ul>
+              <p>synonyms:</p>
+              {definition.tr?.map((entry) => {
+                return <li>{`${entry.text} > ${entry.ts}`}</li>;
+              })}
+            </ul>
+          </>
+        ) : (
+          <p>nothing found</p>
+        )}
+      </div>
+
       <h2>Translation App</h2>
       <Form searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>      
       <Translations answer={definition} />
+
     </div>
   );
 };
