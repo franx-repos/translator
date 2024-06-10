@@ -1,4 +1,5 @@
 import React from "react";
+import useFetchData from "./UseFetchData";
 
 function Translator() {
   return (
