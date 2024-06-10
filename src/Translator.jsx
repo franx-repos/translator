@@ -40,15 +40,20 @@ const Translator = () => {
 
   return (
     <div>
-      <h1>Translation App</h1>
-      <div>
+      <div className="flex flex-row">
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for a word..."
         />
-        <button onClick={handleSearch}>Search</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
       </div>
       <div>
         {definition.tr ? (
