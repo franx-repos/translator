@@ -1,25 +1,15 @@
-
 import { useState } from "react";
 import axios from "axios";
+import Form from "./components/Form";
+import Translations from "./components/Translations";
 
 const Translator = () => {
-  const [definition, setDefinition] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
-
-import { useState } from 'react';
-import axios from 'axios';
-import Form from './components/Form';
-import Translations from './components/Translations';
-
-const Translator = () => {
-
-  const [definition, setDefinition] = useState('');
+  const [definition, setDefinition] = useState("");
   const [searchTerm, setSearchTerm] = useState({
     from: null,
     to: null,
-    searchStr: ''
+    searchStr: "",
   });
-
 
   const fetchDefinition = async (word) => {
     const apiKey =
@@ -35,8 +25,7 @@ const Translator = () => {
         // const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
         const definition = data.def[0] || "No definition found.";
 
-        const definition = data.def[0]?.tr[0]?.text || 'No definition found.';
-        console.log(data)
+        console.log(data);
 
         setDefinition(definition);
         console.log(definition);
@@ -62,7 +51,6 @@ const Translator = () => {
 
   return (
     <div>
-
       <h1>Translation App</h1>
       <div>
         <input
@@ -91,9 +79,12 @@ const Translator = () => {
       </div>
 
       <h2>Translation App</h2>
-      <Form searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch}/>      
+      <Form
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+      />
       <Translations answer={definition} />
-
     </div>
   );
 };
