@@ -22,7 +22,7 @@ function useFetchData() {
     fetchData();
   }, []);
 
-  return { pokemons, isLoading };
+  return { pokemons, isLoading, error };
 }
 
 export default useFetchData;
