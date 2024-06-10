@@ -75,36 +75,36 @@ const Translator = () => {
               </p>
             </div>
             <div className="border-t border-gray-200">
-              <dl>
+              <div>
                 {definition.tr ? (
                   <>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <div className="text-sm font-medium text-gray-500">
                         Word Type
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {definition.pos}
-                      </dd>
+                      </div>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <div className="text-sm font-medium text-gray-500">
                         Phonetic Spelling
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {definition.ts}
-                      </dd>
+                      </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                      <div className="text-sm font-medium text-gray-500">
                         Synonyms
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      </div>
+                      <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         <ul className="list-disc pl-5 space-y-1">
                           {definition.tr?.map((entry, index) => (
                             <li key={index}>{`${entry.text} > ${entry.ts}`}</li>
                           ))}
                         </ul>
-                      </dd>
+                      </div>
                     </div>
                   </>
                 ) : (
@@ -112,7 +112,7 @@ const Translator = () => {
                     <p className="text-sm text-gray-500">Nothing found.</p>
                   </div>
                 )}
-              </dl>
+              </div>
             </div>
           </div>
         </div>
