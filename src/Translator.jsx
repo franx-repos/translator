@@ -40,11 +40,6 @@ const Translator = () => {
   return (
     <div className=" bg-gray-100 flex flex-col items-center justify-center py-12 px-4">
       <div className="max-w-md w-full space-y-8">
-        <div>
-          <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Translation App
-          </h1>
-        </div>
         <div className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
