@@ -56,20 +56,38 @@ const Translator = () => {
         </button>
       </div>
       <div>
-        {definition.tr ? (
-          <>
-            <p>word type: {definition.pos}</p>
-            <p>phonetic spelling: {definition.ts}</p>
-            <ul>
-              <p>synonyms:</p>
-              {definition.tr?.map((entry) => {
-                return <li>{`${entry.text} > ${entry.ts}`}</li>;
-              })}
-            </ul>
-          </>
-        ) : (
-          <p>nothing found</p>
-        )}
+        <a
+          href="#"
+          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {definition.text}
+          </h5>
+          {definition.tr ? (
+            <>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                word type: {definition.pos}
+              </p>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                phonetic spelling: {definition.ts}
+              </p>
+              <ul>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  synonyms:
+                </p>
+                {definition.tr?.map((entry) => {
+                  return (
+                    <li>
+                      <p className="font-normal text-gray-700 dark:text-gray-400">{`${entry.text} > ${entry.ts}`}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          ) : (
+            <p>nothing found</p>
+          )}
+        </a>
       </div>
     </div>
   );
